@@ -1,0 +1,19 @@
+<h2 style="color: red">Web socket unicast</h2>
+<div style="align-items: center" class="h-100 row align-items-center">
+<form [formGroup]="userForm" (submit)="openSocket()" *ngIf="isLoaded">
+  <div style="margin-bottom: 20px;">
+    <input type="text" formControlName="fromId" name="fromId" placeholder="Your id">
+    <input type="submit" [disabled]="userForm.invalid || isCustomSocketOpened" value="Submit">
+  </div>
+  <input type="text" formControlName="toId" name="toId" placeholder="Receiver id">
+</form>
+<form [formGroup]="form" (submit)="sendMessageUsingSocket()">
+  <p> Message: </p>
+  <input type="text" formControlName="message" name="message" placeholder="Message">
+  <input type="submit" [disabled]="form.invalid || userForm.invalid" value="Send">
+  <!-- <input type="button" [disabled]="form.invalid || userForm.invalid" value="Send using a rest controller" (click)="sendMessageUsingRest()"> -->
+</form>
+</div>
+<ul>
+  <li *ngFor="let message of messages">From: {{message.fromId}}, To: {{message.toId}}, Message: {{message.message}}</li>
+</ul>
